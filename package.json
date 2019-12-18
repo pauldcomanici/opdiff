@@ -1,0 +1,60 @@
+{
+  "name": "opdiff",
+  "description": "Diff by operations",
+  "repository": "https://github.com/darkyndy/opdiff",
+  "license": "MIT",
+  "private": false,
+  "main": "lib/index.js",
+  "author": "darkyndy",
+  "devDependencies": {
+    "@babel/cli": "7.7.5",
+    "@babel/core": "7.7.5",
+    "@babel/preset-env": "7.7.6",
+    "babel-jest": "24.9.0",
+    "codecov": "3.6.1",
+    "eslint": "6.7.2",
+    "eslint-plugin-eslint-comments": "3.1.2",
+    "eslint-plugin-import": "2.19.1",
+    "jest": "24.9.0",
+    "npm-check": "5.9.0",
+    "rimraf": "3.0.0",
+    "snyk": "1.258.1"
+  },
+  "peerDependencies": {},
+  "scripts": {
+    "build": "npm run lint && npm run test-coverage && npm run snyk-test && npm run compile && npm run test-e2e",
+    "compile": "rimraf lib && babel src --out-dir lib",
+    "lint": "npm run lint-source && npm run lint-tests",
+    "lint-source": "eslint ./src",
+    "lint-tests": "eslint ./__tests__",
+    "prepare": "npm run snyk-protect",
+    "prepublishOnly": "npm run build",
+    "postinstall": "node ./scripts/postinstall.js || exit 0",
+    "report-coverage": "codecov",
+    "test": "snyk test && jest --config=./config/jest-ut.json",
+    "test-e2e": "jest --config=./__e2e__/jest.json",
+    "test-e2e-latest": "npm run compile && npm run test-e2e",
+    "test-watch": "npm run test -- --watch",
+    "test-coverage": "npm run test -- --coverage",
+    "safe-install": "npm i && npm audit fix",
+    "snyk-protect": "snyk protect",
+    "snyk-test": "snyk test",
+    "snyk-wizard": "snyk wizard",
+    "upgrade-all": "npm-check --update-all",
+    "upgrade-interactive": "npm-check --update"
+  },
+  "keywords": [
+    "difference",
+    "opdiff",
+    "operations"
+  ],
+  "files": [
+    "lib",
+    "scripts"
+  ],
+  "bugs": {
+    "url": "https://github.com/darkyndy/opdiff/issues"
+  },
+  "version": "1.1.2",
+  "snyk": true
+}
